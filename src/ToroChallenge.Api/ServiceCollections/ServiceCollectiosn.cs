@@ -1,0 +1,55 @@
+﻿using FluentValidation.AspNetCore;
+using Microsoft.OpenApi.Models;
+using System.Reflection;
+using ToroChallenge.Application.UseCases.Investimentos;
+using ToroChallenge.Application.UseCases.Saldos;
+using ToroChallenge.Domain.Services;
+
+namespace ToroChallenge.Api.ServiceCollections
+{
+    public static class ServiceCollectiosns
+    {
+        public static IServiceCollection AddConfigureServices(this IServiceCollection services)
+        {
+            Assembly assembly = typeof(InvestimentoHandler).GetTypeInfo().Assembly;
+            services.AddMediatR(x =>
+            {
+                x.RegisterServicesFromAssembly(assembly);
+            });
+            services.AddFluentValidationAutoValidation();
+            services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Baas.Api", Version = "v1" }));
+            //services.AddScoped<DbSession>();
+            //services.AddScoped<MongoDbSession>();
+            //services.AddTransient<IAccountRepository, AccountRepository>();
+            //services.AddTransient<IClienteRepository, ClienteRepository>();
+            //services.AddTransient<IContaCorrenteRepository, ContaCorrenteRepository>();
+            //services.AddTransient<ICreatedAccountEventRepository, CreatedAccountEventRepository>();
+            //services.AddTransient<IEnterpriseRepository, EnterpriseRepository>();
+            //services.AddTransient<ITransactionRepository, TransactionRepository>();
+            //services.AddTransient<IBusMessage, ProcudeMessage>();
+            services.AddTransient<IInvestimentoHandler, InvestimentoHandler>();
+            services.AddTransient<ISaldoCommandHandler, SaldoCommandHandler>();
+            services.AddTransient<IInvestimentoService, InvestimentoService>();
+            services.AddTransient<ISaldoService, SaldoService>();
+            return services;
+
+        }
+        public static WebApplication AddCustomHealthChecks(this WebApplication app)
+        {
+            app.MapControllers();
+
+            app.UseEndpoints(x =>
+            {
+                x.MapHealthChecks("/health/live", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
+                {
+                    Predicate = _ => false
+                });
+                x.MapHealthChecks("/health/ready", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
+                {
+                    Predicate = healthCheck => healthCheck.Tags.Contains("ready")
+                });
+            });
+            return app;
+        }
+    }
+}

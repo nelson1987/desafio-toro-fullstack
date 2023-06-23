@@ -1,4 +1,7 @@
+using FluentValidation;
+using System;
 using ToroChallenge.Api.ServiceCollections;
+using ToroChallenge.Application.UseCases.Patrimonios;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +14,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddConfigureServices();
 
+builder.Services.AddValidatorsFromAssemblyContaining<PatrimonioValidator>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

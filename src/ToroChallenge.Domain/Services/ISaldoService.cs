@@ -6,11 +6,4 @@ namespace ToroChallenge.Domain.Services
     {
         Task<Saldo> GetAsync(string loginUsuario, CancellationToken cancellationToken);
     }
-    public class SaldoService : ISaldoService
-    {
-        public Task<Saldo> GetAsync(string loginUsuario, CancellationToken cancellationToken)
-        {
-            throw new NotImplementedException();
-        }
-    }
 }

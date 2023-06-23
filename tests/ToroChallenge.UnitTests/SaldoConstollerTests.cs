@@ -30,9 +30,13 @@ namespace ToroChallenge.UnitTests
         public async Task ReturnOk()
         {
             PatrimonioCommand commando = new PatrimonioCommand();
-            ObjectResult retorno = (ObjectResult)await _controller.Post(commando, It.IsAny<CancellationToken>());
+            var retorno = (StatusCodeResult)await _controller.Post(commando, It.IsAny<CancellationToken>());
             //retorno.Should().Be(HttpStatusCode.OK);
+            //Assert.IsType<BadRequestObjectResult>(result);
             retorno.Should().NotBeNull();
+            retorno.StatusCode.Should().Be((int)HttpStatusCode.OK);
         }
+        //Retorno 412 Se tiver problema no command
+        //Retorno NotFound Se não achar o cliente
     }
 }

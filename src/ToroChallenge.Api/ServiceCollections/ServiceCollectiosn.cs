@@ -3,6 +3,8 @@ using Microsoft.OpenApi.Models;
 using System.Reflection;
 using ToroChallenge.Application.UseCases.Investimentos;
 using ToroChallenge.Application.UseCases.Saldos;
+using ToroChallenge.Data.MongoDb;
+using ToroChallenge.Domain.Repositories;
 using ToroChallenge.Domain.Services;
 
 namespace ToroChallenge.Api.ServiceCollections
@@ -27,10 +29,17 @@ namespace ToroChallenge.Api.ServiceCollections
             //services.AddTransient<IEnterpriseRepository, EnterpriseRepository>();
             //services.AddTransient<ITransactionRepository, TransactionRepository>();
             //services.AddTransient<IBusMessage, ProcudeMessage>();
+            //Handlers
             services.AddTransient<IInvestimentoHandler, InvestimentoHandler>();
             services.AddTransient<ISaldoCommandHandler, SaldoCommandHandler>();
+            //Servicos
             services.AddTransient<IInvestimentoService, InvestimentoService>();
             services.AddTransient<ISaldoService, SaldoService>();
+            //Servicos
+            services.AddTransient<IInvestimentoQueryRepository, InvestimentoQueryRepository>();
+            services.AddTransient<IInvestimentoCommandRepository, InvestimentoCommandRepository>();
+            services.AddTransient<ISaldoQueryRepository, SaldoQueryRepository>();
+            services.AddTransient<ISaldoCommandRepository, SaldoCommandRepository>();
             return services;
 
         }

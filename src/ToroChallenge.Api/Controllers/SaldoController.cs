@@ -1,3 +1,4 @@
+using Elastic.CommonSchema;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ToroChallenge.Application.UseCases.Patrimonios;
@@ -23,7 +24,8 @@ namespace ToroChallenge.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] PatrimonioCommand command, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("", command.ToJson());
+            _logger.LogInformation("Teste: {command}", command.ToJson());
+            Serilog.Log.Information("PostClient method called: {command}", command.ToJson());
             await _mediator.Send(command);
             return Ok();
         }

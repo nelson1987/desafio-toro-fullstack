@@ -1,6 +1,7 @@
 ﻿using FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using ToroChallenge.Application.ApplicationResults;
 using ToroChallenge.Application.UseCases.Investimentos;
 using ToroChallenge.Application.UseCases.Saldos;
 using ToroChallenge.Data.MongoDb;
@@ -33,6 +34,7 @@ namespace ToroChallenge.Api.ServiceCollections
             services.AddTransient<IInvestimentoCommandRepository, InvestimentoCommandRepository>();
             services.AddTransient<ISaldoQueryRepository, SaldoQueryRepository>();
             services.AddTransient<ISaldoCommandRepository, SaldoCommandRepository>();
+            services.AddTransient<IApplicationResult, ApplicationResult>();
             return services;
 
         }

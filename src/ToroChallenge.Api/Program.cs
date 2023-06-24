@@ -1,48 +1,82 @@
 using FluentValidation;
+using Microsoft.AspNetCore.ResponseCompression;
+using Serilog;
+using System.IO.Compression;
 using ToroChallenge.Api.ServiceCollections;
 using ToroChallenge.Application.UseCases.Patrimonios;
-
-var builder = WebApplication.CreateBuilder(args);
-
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-builder.Services.AddConfigureServices();
-
-builder.Services.AddValidatorsFromAssemblyContaining<PatrimonioValidator>();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+try
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    var builder = WebApplication.CreateBuilder(args);
+
+    builder.AddSerilog(builder.Configuration, "API Observability");
+
+    Log.Information("Starting API");
+
+
+    // Add services to the container.
+
+    builder.Services.AddControllers();
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+
+    builder.Services.AddConfigureServices();
+
+    // Configura o modo de compressão
+    builder.Services.Configure<GzipCompressionProviderOptions>(
+        options => options.Level = CompressionLevel.Optimal);
+    builder.Services.AddResponseCompression(options =>
+    {
+        options.Providers.Add<GzipCompressionProvider>();
+        options.EnableForHttps = true;
+    });
+
+    builder.Services.AddValidatorsFromAssemblyContaining<PatrimonioValidator>();
+
+    var app = builder.Build();
+
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+
+    app.UseHttpsRedirection();
+
+    app.UseRouting();
+
+    app.UseAuthorization();
+
+    app.UseSerilog();
+
+    app.MapControllers();
+
+    //app.UseEndpoints(x =>
+    //{
+    //    x.MapHealthChecks("/health/live", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
+    //    {
+    //        Predicate = _ => false
+    //    });
+    //    x.MapHealthChecks("/health/ready", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
+    //    {
+    //        Predicate = healthCheck => healthCheck.Tags.Contains("ready")
+    //    });
+    //});
+    //app.UseHealthChecks("/health/live", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
+    //{
+    //    Predicate = _ => false
+    //});
+    app.Run();
+
+
 }
-
-app.UseHttpsRedirection();
-
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-//app.UseEndpoints(x =>
-//{
-//    x.MapHealthChecks("/health/live", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
-//    {
-//        Predicate = _ => false
-//    });
-//    x.MapHealthChecks("/health/ready", new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
-//    {
-//        Predicate = healthCheck => healthCheck.Tags.Contains("ready")
-//    });
-//});
-
-app.Run();
-
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Host terminated unexpectedly");
+}
+finally
+{
+    Log.Information("Server Shutting down...");
+    Log.CloseAndFlush();
+}

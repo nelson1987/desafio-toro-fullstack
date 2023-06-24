@@ -24,7 +24,7 @@ namespace ToroChallenge.Application.ApplicationResults
         void Failed(string message);
         ObjectResult Failed(ErroMessages message);
     }
-    public class AplicationResult : IApplicationResult
+    public class ApplicationResult : IApplicationResult
     {
         public string Message { get; set; }
         public bool Status { get; set; }

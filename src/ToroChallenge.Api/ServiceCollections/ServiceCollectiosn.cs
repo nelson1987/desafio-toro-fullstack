@@ -22,13 +22,6 @@ namespace ToroChallenge.Api.ServiceCollections
             services.AddSwaggerGen(c => c.SwaggerDoc("v1", new OpenApiInfo { Title = "Baas.Api", Version = "v1" }));
             //services.AddScoped<DbSession>();
             //services.AddScoped<MongoDbSession>();
-            //services.AddTransient<IAccountRepository, AccountRepository>();
-            //services.AddTransient<IClienteRepository, ClienteRepository>();
-            //services.AddTransient<IContaCorrenteRepository, ContaCorrenteRepository>();
-            //services.AddTransient<ICreatedAccountEventRepository, CreatedAccountEventRepository>();
-            //services.AddTransient<IEnterpriseRepository, EnterpriseRepository>();
-            //services.AddTransient<ITransactionRepository, TransactionRepository>();
-            //services.AddTransient<IBusMessage, ProcudeMessage>();
             //Handlers
             services.AddTransient<IInvestimentoHandler, InvestimentoHandler>();
             services.AddTransient<ISaldoCommandHandler, SaldoCommandHandler>();

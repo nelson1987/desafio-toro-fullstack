@@ -7,7 +7,8 @@ namespace ToroChallenge.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    //[Produces("application/json")]
+    [Produces("application/json")]
+    [Consumes("application/json")]
     public class SaldoController : ControllerBase
     {
         private readonly ILogger<SaldoController> _logger;

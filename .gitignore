@@ -35,3 +35,6 @@
 \.vs
 \obj
 \properties
+
+# CodeRush
+\.cr

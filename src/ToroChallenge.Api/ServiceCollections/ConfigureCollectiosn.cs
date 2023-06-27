@@ -10,7 +10,7 @@ using ToroChallenge.Domain.Services;
 
 namespace ToroChallenge.Api.ServiceCollections
 {
-    public static class ServiceCollectiosns
+    public static class ConfigureCollections
     {
         public static IServiceCollection AddConfigureServices(this IServiceCollection services)
         {
@@ -27,13 +27,13 @@ namespace ToroChallenge.Api.ServiceCollections
             services.AddTransient<IInvestimentoHandler, InvestimentoHandler>();
             services.AddTransient<ISaldoCommandHandler, SaldoCommandHandler>();
             //Servicos
-            services.AddTransient<IInvestimentoService, InvestimentoService>();
-            services.AddTransient<ISaldoService, SaldoService>();
+            services.AddTransient<IInvestimentoService, InvestimentService>();
+            services.AddTransient<IBalanceService, BalanceService>();
             //Servicos
             services.AddTransient<IInvestimentoQueryRepository, InvestimentoQueryRepository>();
             services.AddTransient<IInvestimentoCommandRepository, InvestimentoCommandRepository>();
-            services.AddTransient<ISaldoQueryRepository, SaldoQueryRepository>();
-            services.AddTransient<ISaldoCommandRepository, SaldoCommandRepository>();
+            services.AddTransient<IBalanceQueryRepository, SaldoQueryRepository>();
+            services.AddTransient<IBalanceCommandRepository, SaldoCommandRepository>();
             services.AddTransient<IApplicationResult, ApplicationResult>();
             return services;
 

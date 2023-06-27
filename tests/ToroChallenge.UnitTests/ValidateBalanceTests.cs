@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ToroChallenge.UnitTests
 {
-    internal class ValidarSaldoTests
+    //Validar Saldo
+    internal class ValidateBalanceTests
     {
     }
 }

@@ -9,16 +9,16 @@ using ToroChallenge.Application.UseCases.Patrimonios;
 
 namespace ToroChallenge.UnitTests
 {
-    public class SaldoConstollerTests
+    public class BalanceControllerTests
     {
-        private readonly Mock<ILogger<SaldoController>> _logger;
+        private readonly Mock<ILogger<BalanceController>> _logger;
         private readonly Mock<IMediator> _mediator;
-        private readonly SaldoController _controller;
-        public SaldoConstollerTests()
+        private readonly BalanceController _controller;
+        public BalanceControllerTests()
         {
-            _logger = new Mock<ILogger<SaldoController>>();
+            _logger = new Mock<ILogger<BalanceController>>();
             _mediator = new Mock<IMediator>();
-            _controller = new SaldoController(_logger.Object, _mediator.Object);
+            _controller = new BalanceController(_logger.Object, _mediator.Object);
         }
 
         [SetUp]
@@ -30,7 +30,7 @@ namespace ToroChallenge.UnitTests
         public async Task ReturnOk()
         {
             PatrimonioCommand commando = new PatrimonioCommand();
-            var retorno = (StatusCodeResult)await _controller.Post(commando, It.IsAny<CancellationToken>());
+            var retorno = (StatusCodeResult)await _controller.PostSaldoAsync(commando, It.IsAny<CancellationToken>()).ConfigureAwait(true);
             //retorno.Should().Be(HttpStatusCode.OK);
             //Assert.IsType<BadRequestObjectResult>(result);
             retorno.Should().NotBeNull();

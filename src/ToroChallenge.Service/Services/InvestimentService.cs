@@ -3,12 +3,12 @@ using ToroChallenge.Domain.Repositories;
 
 namespace ToroChallenge.Domain.Services
 {
-    public class InvestimentoService : IInvestimentoService
+    public class InvestimentService : IInvestimentoService
     {
         private readonly IInvestimentoQueryRepository _queryRepository;
         private readonly IInvestimentoCommandRepository _commandRepository;
 
-        public InvestimentoService(IInvestimentoQueryRepository queryRepository, IInvestimentoCommandRepository commandRepository)
+        public InvestimentService(IInvestimentoQueryRepository queryRepository, IInvestimentoCommandRepository commandRepository)
         {
             _queryRepository = queryRepository;
             _commandRepository = commandRepository;
@@ -16,7 +16,12 @@ namespace ToroChallenge.Domain.Services
 
         public async Task<Investimento[]> GetAsync(string loginUsuario, CancellationToken cancellationToken)
         {
-            return await _queryRepository.GetAsync(loginUsuario, cancellationToken);
+            return await _queryRepository.GetAsync(loginUsuario, cancellationToken).ConfigureAwait(false);
+        }
+
+        public async Task PostAsync(Investimento investimento, CancellationToken cancellationToken)
+        {
+            await _commandRepository.PostAsync(investimento, cancellationToken).ConfigureAwait(true);
         }
     }
 }

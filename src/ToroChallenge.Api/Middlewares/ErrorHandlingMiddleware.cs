@@ -12,15 +12,15 @@ namespace ToroChallenge.Api.Middlewares
             this.next = next;
         }
 
-        public async Task Invoke(HttpContext context)
+        public async Task InvokeAsync(HttpContext context)
         {
             try
             {
-                await next(context);
+                await next(context).ConfigureAwait(true);
             }
             catch (Exception ex)
             {
-                await HandleExceptionAsync(context, ex);
+                await HandleExceptionAsync(context, ex).ConfigureAwait(true);
             }
         }
 

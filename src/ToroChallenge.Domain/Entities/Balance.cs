@@ -1,6 +1,6 @@
 ﻿namespace ToroChallenge.Domain.Entities
 {
-    public class Saldo
+    public class Balance
     {
         public decimal Valor { get; set; }
         public DateTime DataAtualizacao { get; set; }

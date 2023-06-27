@@ -1,11 +1,10 @@
-﻿using Serilog.Events;
-using Serilog.Filters;
+﻿using Elastic.CommonSchema.Serilog;
 using Serilog;
+using Serilog.Events;
 using Serilog.Exceptions;
+using Serilog.Filters;
 using Serilog.Sinks.Elasticsearch;
-using Elastic.CommonSchema.Serilog;
 using ToroChallenge.Api.Middlewares;
-using Microsoft.AspNetCore.Http.Features;
 
 namespace ToroChallenge.Api.ServiceCollections
 {
@@ -49,26 +48,6 @@ namespace ToroChallenge.Api.ServiceCollections
             });
 
             return app;
-        }
-    }
-    public static class LogEnricherExtensions
-    {
-        public static void EnrichFromRequest(IDiagnosticContext diagnosticContext, HttpContext httpContext)
-        {
-            diagnosticContext.Set("UserName", httpContext?.User?.Identity?.Name);
-            diagnosticContext.Set("ClientIP", httpContext?.Connection?.RemoteIpAddress?.ToString());
-            diagnosticContext.Set("UserAgent", httpContext?.Request?.Headers?["User-Agent"].FirstOrDefault());
-            diagnosticContext.Set("Resource", httpContext?.GetMetricsCurrentResourceName());
-        }
-
-        public static string? GetMetricsCurrentResourceName(this HttpContext httpContext)
-        {
-            if (httpContext == null)
-                throw new ArgumentNullException(nameof(httpContext));
-
-            var endpoint = httpContext?.Features?.Get<IEndpointFeature>()?.Endpoint;
-
-            return endpoint?.Metadata?.GetMetadata<EndpointNameMetadata>()?.EndpointName;
         }
     }
 }

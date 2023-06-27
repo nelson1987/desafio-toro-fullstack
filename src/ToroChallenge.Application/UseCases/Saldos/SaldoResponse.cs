@@ -7,7 +7,7 @@ namespace ToroChallenge.Application.UseCases.Saldos
         public decimal Valor { get; set; }
         public DateTime DataAtualizacao { get; set; }
 
-        public static SaldoResponse FromModel(Saldo saldo)
+        public static SaldoResponse FromModel(Balance saldo)
         {
             return new SaldoResponse() { Valor = saldo.Valor, DataAtualizacao = saldo.DataAtualizacao };
         }

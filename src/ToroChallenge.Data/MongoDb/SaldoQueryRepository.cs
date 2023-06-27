@@ -4,16 +4,16 @@ using ToroChallenge.Domain.Repositories;
 
 namespace ToroChallenge.Data.MongoDb
 {
-    public class InvestimentoQueryRepository : IInvestimentoQueryRepository
+    public class SaldoQueryRepository : IBalanceQueryRepository
     {
-        private readonly ILogger<InvestimentoQueryRepository> _logger;
+        private readonly ILogger<SaldoQueryRepository> _logger;
 
-        public InvestimentoQueryRepository(ILogger<InvestimentoQueryRepository> logger)
+        public SaldoQueryRepository(ILogger<SaldoQueryRepository> logger)
         {
             _logger = logger;
         }
 
-        public Task<Investimento[]> GetAsync(string loginUsuario, CancellationToken cancellationToken)
+        public Task<Balance> GetAsync(string loginUsuario, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Teste: {command}", loginUsuario);
             throw new NotImplementedException();

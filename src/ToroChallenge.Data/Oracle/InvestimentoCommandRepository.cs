@@ -1,18 +1,22 @@
-﻿using ToroChallenge.Domain.Repositories;
+﻿using Microsoft.Extensions.Logging;
+using ToroChallenge.Application.Utils;
+using ToroChallenge.Domain.Entities;
+using ToroChallenge.Domain.Repositories;
 
 namespace ToroChallenge.Data.MongoDb
 {
     public class InvestimentoCommandRepository : IInvestimentoCommandRepository
     {
-        public Task PostAsync(string loginUsuario, CancellationToken cancellationToken)
+        private readonly ILogger<InvestimentoCommandRepository> _logger;
+
+        public InvestimentoCommandRepository(ILogger<InvestimentoCommandRepository> logger)
         {
-            throw new NotImplementedException();
+            _logger = logger;
         }
-    }
-    public class SaldoCommandRepository : ISaldoCommandRepository
-    {
-        public Task PostAsync(string loginUsuario, CancellationToken cancellationToken)
+
+        public Task PostAsync(Investimento investimento, CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Teste: {command}", investimento.ToJson());
             throw new NotImplementedException();
         }
     }

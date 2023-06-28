@@ -2,9 +2,9 @@
 
 namespace ToroChallenge.Application.UseCases.Investimentos
 {
-    public class InvestimentoValidator : AbstractValidator<InvestimentoCommand>
+    public class InvestimentoCommandValidator : AbstractValidator<InvestimentoCommand>
     {
-        public InvestimentoValidator()
+        public InvestimentoCommandValidator()
         {
             RuleFor(x => x.LoginUsuario).NotEmpty().WithMessage("Necessário Login de Usuário");
         }

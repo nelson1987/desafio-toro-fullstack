@@ -1,5 +1,9 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using FluentValidation.Results;
+using MediatR;
+using Microsoft.Extensions.Logging;
+using System.ComponentModel;
 using ToroChallenge.Application.ApplicationResults;
+using ToroChallenge.Application.FilterAttributes;
 using ToroChallenge.Application.Resources;
 using ToroChallenge.Application.Utils;
 using ToroChallenge.Domain.Entities;
@@ -20,13 +24,12 @@ namespace ToroChallenge.Application.UseCases.Investimentos
             _logger = logger;
         }
 
+        [ValidationActionFilter]
         public async Task<InvestimentoResponse[]> Handle(InvestimentoCommand request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Teste: {request}", request.ToJson());
-            if (string.IsNullOrEmpty(request.LoginUsuario))
-            {
-                _applicationResult.Failed(DicionarioMessages.LoginUsuarioObrigatorio);
-            }
+
+            await GetValidation(request, cancellationToken);
 
             Investimento[] investimentos = await _investimentoService.GetAsync(request.LoginUsuario, cancellationToken).ConfigureAwait(true);
 
@@ -36,6 +39,18 @@ namespace ToroChallenge.Application.UseCases.Investimentos
             }
 
             return investimentos.Select(x => InvestimentoResponse.FromModel(x)).ToArray();
+        }
+        public async Task GetValidation(InvestimentoCommand request, CancellationToken cancellationToken)
+        {
+            if (request.HasError(out IList<ValidationFailure> errors))
+            {
+                _applicationResult.Failed(errors);
+            }
+
+            if (string.IsNullOrEmpty(request.LoginUsuario))
+            {
+                _applicationResult.Failed(DicionarioMessages.LoginUsuarioObrigatorio);
+            }
         }
     }
 }

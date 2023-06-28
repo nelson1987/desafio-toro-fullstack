@@ -1,5 +1,7 @@
+using FluentValidation.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using ToroChallenge.Application.FilterAttributes;
 using ToroChallenge.Application.UseCases.Patrimonios;
 using ToroChallenge.Application.Utils;
 
@@ -21,10 +23,11 @@ namespace ToroChallenge.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostSaldoAsync([FromBody] PatrimonioCommand command, CancellationToken cancellationToken)
+        [ValidationActionFilter]
+        public async Task<IActionResult> PostSaldoAsync([FromBody] PatrimonioCommand request, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Teste: {command}", command.ToJson());
-            await _mediator.Send(command, cancellationToken).ConfigureAwait(true);
+            _logger.LogInformation("Teste: {command}", request.ToJson());
+            await _mediator.Send(request, cancellationToken).ConfigureAwait(true);
             return Ok();
         }
     }

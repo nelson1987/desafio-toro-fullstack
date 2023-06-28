@@ -1,37 +1,43 @@
-﻿using ToroChallenge.Application.Resources;
+﻿using FluentValidation.Results;
+using ToroChallenge.Application.Resources;
 
 namespace ToroChallenge.Application.ApplicationResults
 {
     public class ApplicationResult : IApplicationResult
     {
         public string Message { get; set; }
-        public bool Status { get; set; }
+        public bool Success { get; set; }
 
         public void Sucess() { }
         public void UnAuthorized() { }
 
         public void NotFound(string message)
         {
-            Status = false;
+            Success = false;
             Message = message;
         }
         public ObjectResult NotFound(ErroMessages message)
         {
-            Status = false;
+            Success = false;
             Message = message.Message;
-            return new ObjectResult(this.Status, this.Message);
+            return new ObjectResult(this.Success, this.Message);
         }
 
         public void Failed(string message)
         {
-            Status = false;
+            Success = false;
             Message = message;
         }
         public ObjectResult Failed(ErroMessages message)
         {
-            Status = false;
+            Success = false;
             Message = message.Message;
-            return new ObjectResult(this.Status, this.Message);
+            return new ObjectResult(this.Success, this.Message);
+        }
+
+        public ObjectResult Failed(IList<ValidationFailure> message)
+        {
+            throw new NotImplementedException();
         }
     }
 }

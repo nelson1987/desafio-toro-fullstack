@@ -27,8 +27,8 @@ namespace ToroChallenge.Api.Controllers
         public async Task<IActionResult> PostSaldoAsync([FromBody] PatrimonioCommand request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Teste: {command}", request.ToJson());
-            await _mediator.Send(request, cancellationToken).ConfigureAwait(true);
-            return Ok();
+            return await _mediator.Send(request, cancellationToken).ConfigureAwait(true);
+            //return Ok();
         }
     }
 }

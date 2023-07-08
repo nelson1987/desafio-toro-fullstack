@@ -13,6 +13,6 @@ namespace ToroChallenge.Application.ApplicationResults
         void UnAuthorized();
         void Failed(string message);
         ObjectResult Failed(ErroMessages message);
-        ObjectResult Failed(IList<ValidationFailure> message);
+        ObjectResult Failed(IDictionary<string, string[]> message);
     }
 }

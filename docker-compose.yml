@@ -1,28 +1,83 @@
 version: '3.7'
 services:
-
-  elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.7.0
+##https://henriquemauri.net/centralizando-logs-com-elastic-stack-e-net-parte-4-kibana/
+##https://www.dotnetcurry.com/aspnet/1354/elastic-search-kibana-in-docker-dotnet-core-app
+#  elasticsearch:
+#    container_name: elasticsearch
+#    image: docker.elastic.co/elasticsearch/elasticsearch:8.3.1
+#    ports:
+#      - "9200:9200"
+#      - "9300:9300"
+#    environment:
+#      discovery.type: "single-node"
+#      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
+#      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
+#      xpack.monitoring.enabled: "true"
+#    volumes:
+#      - ./esdata:/usr/share/elasticsearch/data
+#      
+#  kibana:
+#    container_name: kibana
+#    image: docker.elastic.co/kibana/kibana:8.3.1
+#    ports:
+#      - "5601:5601"
+#    environment:
+#      ELASTICSEARCH_URL: http://elasticsearch:9200
+#    depends_on:
+#      - elasticsearch
+#
+##https://hub.docker.com/_/mongo
+##https://renatogroffe.medium.com/mongodb-mongo-express-docker-compose-montando-rapidamente-um-ambiente-para-uso-824f25ca6957
+#  mongo:
+#    image: mongo
+#    container_name: mongo
+#    restart: always
+#    environment:
+#      MONGO_INITDB_ROOT_USERNAME: root
+#      MONGO_INITDB_ROOT_PASSWORD: example
+#
+#  mongo-express:
+#    image: mongo-express
+#    container_name: express
+#    restart: always
+#    ports:
+#      - 8081:8081
+#    environment:
+#      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+#      ME_CONFIG_MONGODB_ADMINPASSWORD: example
+#      ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+#      # ME_CONFIG_BASICAUTH_USERNAME: "renatogroffe"
+#      # ME_CONFIG_BASICAUTH_PASSWORD: "MongoExpress2019!"
+#
+#  #rabbit:
+#  rabbitmq:
+#      image: rabbitmq:management
+#      container_name: rabbitmq
+#      environment:
+#        - RABBITMQ_DEFAULT_USER=guest
+#        - RABBITMQ_DEFAULT_PASS=guest
+#      ports:
+#        - "5672:5672"
+#        - "15672:15672"
+#
+#  #oracle:
+#  #redis:
+#  #api
+  
+  siteheroismarvel:
+    image: siteheroismarvel
+    build:
+      context: .
     ports:
-      - "9200:9200"
-      - "9300:9300"
-    environment:
-      discovery.type: "single-node"
-      ES_JAVA_OPTS: "-Xms2g -Xmx2g"
-      ELASTIC_PASSWORD: ${ELASTIC_PASSWORD}
-      xpack.monitoring.enabled: "true"
-    volumes:
-      - ./esdata:/usr/share/elasticsearch/data
-      
-  kibana:
-    image: docker.elastic.co/kibana/kibana:7.7.0
-    ports:
-      - "5601:5601"
-    environment:
-      ELASTICSEARCH_URL: http://elasticsearch:9200
-    depends_on:
-      - elasticsearch
-      
-volumes:
-  esdata:
-    driver: local
+      - "20000:80"
+    networks:
+      - marvel-network
+  #app
+networks: 
+    marvel-network:
+        driver: bridge
+#volumes:
+#  esdata:
+#    driver: local
+  # data:
+  #   driver: local

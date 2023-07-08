@@ -1,5 +1,7 @@
 ﻿using Serilog;
 using System.Net;
+using ToroChallenge.Application.ApplicationResults;
+using ToroChallenge.Application.Utils;
 
 namespace ToroChallenge.Api.Middlewares
 {
@@ -30,11 +32,11 @@ namespace ToroChallenge.Api.Middlewares
 
             var code = HttpStatusCode.InternalServerError;
 
-            var result = System.Text.Json.JsonSerializer.Serialize(new { error = exception?.Message });
+            var result = new ApplicationResult() { Message = exception?.Message, Success = false };
 
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)code;
-            return context.Response.WriteAsync(result);
+            return context.Response.WriteAsync(result.ToJson());
         }
     }
 }

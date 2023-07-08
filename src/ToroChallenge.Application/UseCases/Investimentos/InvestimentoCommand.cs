@@ -10,9 +10,9 @@ namespace ToroChallenge.Application.UseCases.Investimentos
 
         public ValidationResult GetValidation() => new InvestimentoCommandValidator().Validate(this);
 
-        public bool HasError(out IList<ValidationFailure> errors)
+        public bool HasError(out IDictionary<string, string[]> errors)
         {
-            errors = GetValidation().Errors;
+            errors = GetValidation().ToDictionary();
             return !GetValidation().IsValid;
         }
     }

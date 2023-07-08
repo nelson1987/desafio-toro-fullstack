@@ -1,5 +1,6 @@
 ﻿using FluentValidation.Results;
 using ToroChallenge.Application.Resources;
+using ToroChallenge.Application.Utils;
 
 namespace ToroChallenge.Application.ApplicationResults
 {
@@ -35,9 +36,11 @@ namespace ToroChallenge.Application.ApplicationResults
             return new ObjectResult(this.Success, this.Message);
         }
 
-        public ObjectResult Failed(IList<ValidationFailure> message)
+        public ObjectResult Failed(IDictionary<string, string[]> message)
         {
-            throw new NotImplementedException();
+            Success = false;
+            Message = message.ToJson();
+            return new ObjectResult(this.Success, this.Message);
         }
     }
 }

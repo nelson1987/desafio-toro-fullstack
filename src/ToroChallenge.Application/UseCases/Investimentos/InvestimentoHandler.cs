@@ -1,7 +1,5 @@
 ﻿using FluentValidation.Results;
-using MediatR;
 using Microsoft.Extensions.Logging;
-using System.ComponentModel;
 using ToroChallenge.Application.ApplicationResults;
 using ToroChallenge.Application.FilterAttributes;
 using ToroChallenge.Application.Resources;
@@ -42,7 +40,7 @@ namespace ToroChallenge.Application.UseCases.Investimentos
         }
         public async Task GetValidation(InvestimentoCommand request, CancellationToken cancellationToken)
         {
-            if (request.HasError(out IList<ValidationFailure> errors))
+            if (request.HasError(out IDictionary<string, string[]> errors))
             {
                 _applicationResult.Failed(errors);
             }

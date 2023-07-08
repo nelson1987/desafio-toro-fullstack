@@ -4,22 +4,42 @@ using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace ToroChallenge.Application.FilterAttributes
 {
+    public class SimpleError
+    {
+        public string Name { get; set; }
+        public string Message { get; set; }
+
+        public override string ToString()
+        {
+            return $"Property: {Name} Message: {Message}";
+        }
+    }
     public class ValidationActionFilter : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             IValidable validable = context.ActionArguments["request"] as IValidable;
-            if (validable.HasError(out IList<ValidationFailure> errors))
+            if (validable.HasError(out IDictionary<string, string[]> errors))
             {
                 ErroValidacao(context, errors);
             }
-            //base.OnActionExecuting(context);
         }
-        private void ErroValidacao(ActionExecutingContext context, IList<ValidationFailure> erros)
+        private void ErroValidacao(ActionExecutingContext context, IDictionary<string, string[]> erros)
         {
+            var errors = new List<SimpleError>();
+
+            foreach (var pair in erros)
+            {
+                //foreach (var error in pair.Value)
+                //{
+                //    errors.Add(new SimpleError { Name = pair.Key, Message = error.ErrorMessage });
+                //}
+            }
+
+            //return Json(errors);
             var response = new
             {
-                erros = erros.Select((ValidationFailure c) => new Error(c.ErrorCode, c.PropertyName, c.ErrorMessage))
+                //erros = erros.Select((ValidationFailure c) => new Error(c.ErrorCode, c.PropertyName, c.ErrorMessage))
             };
             SetResponse(context, StatusCode(412, response));
         }
@@ -40,7 +60,7 @@ namespace ToroChallenge.Application.FilterAttributes
 
     public interface IValidable
     {
-        bool HasError(out IList<ValidationFailure> errors);
+        bool HasError(out IDictionary<string, string[]> errors);
     }
 
     public class Error

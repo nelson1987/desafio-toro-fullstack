@@ -2,7 +2,7 @@
 using ToroChallenge.Application.Utils;
 using ToroChallenge.Domain.Repositories;
 
-namespace ToroChallenge.Data.MongoDb
+namespace ToroChallenge.Data.Oracle
 {
     public class SaldoCommandRepository : IBalanceCommandRepository
     {

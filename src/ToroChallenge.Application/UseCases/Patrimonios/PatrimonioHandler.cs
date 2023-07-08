@@ -1,5 +1,4 @@
-﻿using FluentValidation.Results;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ToroChallenge.Application.UseCases.Investimentos;
@@ -38,7 +37,7 @@ namespace ToroChallenge.Application.UseCases.Patrimonios
         {
             _logger.LogInformation("Teste: {command}", request.ToJson());
             request = new PatrimonioCommand();
-            
+
             ////TODO: Melhorar esse código
             //response.Ativos = await _investimentoHandler.Handle(new InvestimentoCommand() { LoginUsuario = request.LoginUsuario }, cancellationToken).ConfigureAwait(true);
             //response.Saldo = await _saldoCommandHandler.Handle(new SaldoCommand() { LoginUsuario = request.LoginUsuario }, cancellationToken).ConfigureAwait(true);

@@ -1,5 +1,4 @@
-﻿using FluentValidation.Results;
-using ToroChallenge.Application.Resources;
+﻿using ToroChallenge.Application.Resources;
 
 namespace ToroChallenge.Application.ApplicationResults
 {

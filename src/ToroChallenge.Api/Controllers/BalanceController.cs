@@ -1,4 +1,3 @@
-using FluentValidation.Results;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ToroChallenge.Application.FilterAttributes;

@@ -1,5 +1,4 @@
-﻿using FluentValidation.Results;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using ToroChallenge.Application.ApplicationResults;
 using ToroChallenge.Application.FilterAttributes;
 using ToroChallenge.Application.Resources;

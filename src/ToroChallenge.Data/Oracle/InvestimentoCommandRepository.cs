@@ -3,7 +3,7 @@ using ToroChallenge.Application.Utils;
 using ToroChallenge.Domain.Entities;
 using ToroChallenge.Domain.Repositories;
 
-namespace ToroChallenge.Data.MongoDb
+namespace ToroChallenge.Data.Oracle
 {
     public class InvestimentoCommandRepository : IInvestimentoCommandRepository
     {

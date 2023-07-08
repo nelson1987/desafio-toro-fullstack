@@ -1,8 +1,9 @@
 ﻿using Microsoft.Extensions.Logging;
 using ToroChallenge.Domain.Entities;
 using ToroChallenge.Domain.Repositories;
+using ToroChallenge.Domain.Services;
 
-namespace ToroChallenge.Domain.Services
+namespace ToroChallenge.Service.Services
 {
     public class BalanceService : IBalanceService
     {

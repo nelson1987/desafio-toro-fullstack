@@ -1,7 +1,8 @@
 ﻿using ToroChallenge.Domain.Entities;
 using ToroChallenge.Domain.Repositories;
+using ToroChallenge.Domain.Services;
 
-namespace ToroChallenge.Domain.Services
+namespace ToroChallenge.Service.Services
 {
     public class InvestimentService : IInvestimentoService
     {

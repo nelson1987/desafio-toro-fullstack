@@ -38,3 +38,8 @@
 
 # CodeRush
 \.cr
+#Docker
+/data
+/esdata
+*/out
+/src/ToroChallenge.Api/out

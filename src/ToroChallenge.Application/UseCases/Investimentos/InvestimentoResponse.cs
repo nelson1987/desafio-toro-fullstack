@@ -12,7 +12,7 @@ namespace ToroChallenge.Application.UseCases.Investimentos
         {
             return Valor * Quantidade;
         }
-        public static InvestimentoResponse FromModel(Investimento investimento)
+        public static explicit operator InvestimentoResponse(Investimento investimento)
         {
             return new InvestimentoResponse() { Valor = investimento.Valor, DataAtualizacao = investimento.DataAtualizacao };
         }

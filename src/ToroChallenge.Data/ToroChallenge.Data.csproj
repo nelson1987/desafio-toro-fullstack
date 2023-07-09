@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ToroChallenge.Application\ToroChallenge.Application.csproj" />
+    <!--<ProjectReference Include="..\ToroChallenge.Application\ToroChallenge.Application.csproj" />-->
     <ProjectReference Include="..\ToroChallenge.Domain\ToroChallenge.Domain.csproj" />
   </ItemGroup>
 

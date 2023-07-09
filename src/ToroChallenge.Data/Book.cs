@@ -7,7 +7,7 @@ namespace ToroChallenge.Data
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string? Id { get; set; }
+        public string Id { get; set; }
 
         [BsonElement("Name")]
         public string BookName { get; set; } = null!;

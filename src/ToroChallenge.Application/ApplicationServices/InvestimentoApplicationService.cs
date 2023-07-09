@@ -28,12 +28,15 @@ namespace ToroChallenge.Application.ApplicationServices
             var invest = _mediator.Send(new InvestimentoCommand(), cancellationToken);
             await _publisher.Publish(new ContaAbertaEvent() { Numero = "11122233351" }, cancellationToken);
             var alteracao = await _mediator.Send(request, cancellationToken);
+            _logger.LogInformation("Teste: {command}", request.ToJson());
             return request.ToResponse();
         }
 
         public async Task<PatrimonioResponse> PostFilaAsync([FromBody] PatrimonioCommand request, CancellationToken cancellationToken)
         {
+            _logger.LogInformation("Teste: {command}", request.ToJson());
             await _publisher.Publish(new ContaAbertaEvent() { Numero = "11122233351" }, cancellationToken);
+            _logger.LogInformation("Teste: {command}", request.ToJson());
             return request.ToResponse();
         }
     }

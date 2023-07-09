@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using ToroChallenge.Application.Utils;
 using ToroChallenge.Domain.Repositories;
 
 namespace ToroChallenge.Data.Oracle
@@ -15,7 +14,7 @@ namespace ToroChallenge.Data.Oracle
 
         public Task PostAsync(string loginUsuario, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("Teste: {command}", loginUsuario.ToJson());
+            _logger.LogInformation("Teste: {command}", loginUsuario);
             throw new NotImplementedException();
         }
     }

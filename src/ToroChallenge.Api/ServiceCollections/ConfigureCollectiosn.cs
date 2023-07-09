@@ -1,14 +1,13 @@
 ﻿using FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using ToroChallenge.Application.ApplicationServices;
 using ToroChallenge.Application.UseCases.Investimentos;
 using ToroChallenge.Application.UseCases.Saldos;
 using ToroChallenge.Application.Utils;
 using ToroChallenge.Data.MongoDb;
 using ToroChallenge.Data.Oracle;
 using ToroChallenge.Domain.Repositories;
-using ToroChallenge.Domain.Services;
-using ToroChallenge.Service.Services;
 
 namespace ToroChallenge.Api.ServiceCollections
 {

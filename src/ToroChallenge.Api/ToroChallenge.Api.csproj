@@ -29,7 +29,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\ToroChallenge.Application\ToroChallenge.Application.csproj" />
 		<ProjectReference Include="..\ToroChallenge.Data\ToroChallenge.Data.csproj" />
-		<ProjectReference Include="..\ToroChallenge.Service\ToroChallenge.Service.csproj" />
+		<!--<ProjectReference Include="..\ToroChallenge.Data\ToroChallenge.Data.csproj" />-->
 	</ItemGroup>
 
 </Project>

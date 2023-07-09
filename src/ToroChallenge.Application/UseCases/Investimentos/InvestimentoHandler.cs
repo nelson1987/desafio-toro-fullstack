@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
+using ToroChallenge.Application.ApplicationServices;
 using ToroChallenge.Application.Utils;
 using ToroChallenge.Domain.Entities;
-using ToroChallenge.Domain.Services;
 
 namespace ToroChallenge.Application.UseCases.Investimentos
 {

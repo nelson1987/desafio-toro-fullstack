@@ -1,6 +1,6 @@
 ﻿using ToroChallenge.Domain.Entities;
 
-namespace ToroChallenge.Domain.Services
+namespace ToroChallenge.Application.ApplicationServices
 {
     public interface IInvestimentoService
     {

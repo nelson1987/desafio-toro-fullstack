@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
 using MediatR;
-using ToroChallenge.Application.FilterAttributes;
+using ToroChallenge.Application.Utils;
 
 namespace ToroChallenge.Application.UseCases.Investimentos
 {

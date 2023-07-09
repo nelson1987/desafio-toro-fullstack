@@ -1,6 +1,5 @@
 ﻿using Serilog;
 using System.Net;
-using ToroChallenge.Application.ApplicationResults;
 using ToroChallenge.Application.Utils;
 
 namespace ToroChallenge.Api.Middlewares

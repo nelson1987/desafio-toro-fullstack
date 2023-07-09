@@ -1,19 +1,8 @@
-﻿using MediatR;
-using RabbitMQ.Client;
+﻿using RabbitMQ.Client;
 using System.Text;
 
-namespace ToroChallenge.Application.UseCases.ContaAberta
+namespace ToroChallenge.Application.Utils
 {
-
-    public interface IBusMessage
-    {
-        void Init(IEvent message);
-    }
-    public interface IEvent : INotification
-    {
-        Guid CorrelationId { get; }
-        string QueueName { get; }
-    }
     public class ProcudeMessage : IBusMessage
     {
         public void Init(IEvent message)

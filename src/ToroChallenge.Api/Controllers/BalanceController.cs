@@ -1,8 +1,6 @@
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using ToroChallenge.Application.FilterAttributes;
-using ToroChallenge.Application.UseCases.Investimentos;
-using ToroChallenge.Application.UseCases.Patrimonios;
+using ToroChallenge.Application.ApplicationServices;
+using ToroChallenge.Application.Contracts;
 using ToroChallenge.Application.Utils;
 
 namespace ToroChallenge.Api.Controllers
@@ -14,22 +12,37 @@ namespace ToroChallenge.Api.Controllers
     public class BalanceController : ControllerBase
     {
         private readonly ILogger<BalanceController> _logger;
-        private readonly IMediator _mediator;
+        private readonly IInvestimentoApplicationService _mediator;
 
-        public BalanceController(ILogger<BalanceController> logger, IMediator mediator)
+        public BalanceController(ILogger<BalanceController> logger, IInvestimentoApplicationService mediator)
         {
             _logger = logger;
             _mediator = mediator;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> GetAsync(CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("Teste:");
+            return StatusCode(200, "Teste");
+        }
+
         [HttpPost]
         [ValidationActionFilter]
-        public async Task<IActionResult> PostSaldoAsync([FromBody] PatrimonioCommand request, CancellationToken cancellationToken)
+        public async Task<IActionResult> PostSaldoAsync([FromBody] PatrimonioRequest request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Teste: {command}", request.ToJson());
-            var invest = _mediator.Send(new InvestimentoCommand(), cancellationToken);
-            return await _mediator.Send(request, cancellationToken).ConfigureAwait(true);
-            //return Ok();
+            //var response = _mediator.PostSaldoAsync(request.ToDocument());
+            return StatusCode(200, "PostSaldoAsync");
+        }
+
+        [HttpPost("queue")]
+        [ValidationActionFilter]
+        public async Task<IActionResult> PostFilaAsync([FromBody] PatrimonioRequest request, CancellationToken cancellationToken)
+        {
+            _logger.LogInformation("Teste: {command}", request.ToJson());
+            //var response = _mediator.PostFilaAsync(request.ToDocument());
+            return StatusCode(200, "PostFilaAsync");
         }
     }
 }

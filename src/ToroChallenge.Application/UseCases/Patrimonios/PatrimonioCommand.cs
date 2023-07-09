@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
 using MediatR;
-using ToroChallenge.Application.FilterAttributes;
+using ToroChallenge.Application.Utils;
 
 namespace ToroChallenge.Application.UseCases.Patrimonios
 {
@@ -14,6 +14,11 @@ namespace ToroChallenge.Application.UseCases.Patrimonios
         {
             errors = GetValidation().ToDictionary();
             return !GetValidation().IsValid;
+        }
+
+        internal PatrimonioResponse ToResponse()
+        {
+            throw new NotImplementedException();
         }
     }
 }

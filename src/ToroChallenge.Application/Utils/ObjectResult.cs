@@ -1,7 +1,11 @@
-﻿namespace ToroChallenge.Application.ApplicationResults
+﻿namespace ToroChallenge.Application.Utils
 {
     public class ObjectResult
     {
+        public ObjectResult()
+        {
+
+        }
         public ObjectResult(bool status, string message)
         {
             Message = message;

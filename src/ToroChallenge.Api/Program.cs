@@ -6,6 +6,8 @@ using System.IO.Compression;
 using ToroChallenge.Api.ServiceCollections;
 using ToroChallenge.Application.UseCases.ContaAberta;
 using ToroChallenge.Application.UseCases.Patrimonios;
+using ToroChallenge.Application.Utils;
+
 try
 {
     var builder = WebApplication.CreateBuilder(args);
@@ -39,7 +41,7 @@ try
     builder.Services.AddMassTransit(x =>
     {
         x.SetKebabCaseEndpointNameFormatter();
-        x.AddConsumer<ContaAbertaConsumer>(typeof(ContaAbertaConsumerDefinition));
+        x.AddConsumer<ContaAbertaEventConsumer>(typeof(ContaAbertaEventConsumerDefinition));
 
         x.UsingRabbitMq((context, cfg) =>
         {
@@ -47,16 +49,18 @@ try
         });
     });
     builder.Services.AddTransient<IBusMessage, ProcudeMessage>();
+    //builder.Services.AddScoped<IPublishEndpoint>();
 
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
     if (app.Environment.IsDevelopment())
     {
+        app.UseDeveloperExceptionPage();
         app.UseSwagger();
-        app.UseSwaggerUI();
+        //app.UseSwaggerUI();
+        app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "app v1"));
     }
-
     app.UseHttpsRedirection();
 
     app.UseRouting();

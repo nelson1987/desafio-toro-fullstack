@@ -1,4 +1,4 @@
-﻿namespace ToroChallenge.Application.Resources
+﻿namespace ToroChallenge.Application.Utils
 {
     public static class DicionarioMessages
     {

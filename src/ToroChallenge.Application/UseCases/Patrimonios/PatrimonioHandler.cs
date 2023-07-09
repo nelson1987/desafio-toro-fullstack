@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ToroChallenge.Application.UseCases.Investimentos;
 using ToroChallenge.Application.UseCases.Saldos;
@@ -7,19 +6,6 @@ using ToroChallenge.Application.Utils;
 
 namespace ToroChallenge.Application.UseCases.Patrimonios
 {
-    public class ResponseResult<T> : ActionResult
-    {
-        public string title { get; set; }
-        public int status { get; set; }
-        public IDictionary<string, string[]> errors { get; set; }
-
-        public ResponseResult(int status, IDictionary<string, string[]> dictionary)
-        {
-            this.title = "One or more validation errros occured";
-            this.status = status;
-            this.errors = dictionary;
-        }
-    }
     public class PatrimonioHandler : IRequestHandler<PatrimonioCommand, ResponseResult<PatrimonioResponse>>
     {
         private readonly ILogger<PatrimonioHandler> _logger;

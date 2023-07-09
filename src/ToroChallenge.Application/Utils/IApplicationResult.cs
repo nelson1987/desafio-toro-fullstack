@@ -1,6 +1,4 @@
-﻿using ToroChallenge.Application.Resources;
-
-namespace ToroChallenge.Application.ApplicationResults
+﻿namespace ToroChallenge.Application.Utils
 {
     public interface IApplicationResult
     {

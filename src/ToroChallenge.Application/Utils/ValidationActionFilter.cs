@@ -1,18 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Filters;
+﻿using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace ToroChallenge.Application.FilterAttributes
+namespace ToroChallenge.Application.Utils
 {
-    public class SimpleError
-    {
-        public string Name { get; set; }
-        public string Message { get; set; }
-
-        public override string ToString()
-        {
-            return $"Property: {Name} Message: {Message}";
-        }
-    }
     public class ValidationActionFilter : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext context)
@@ -45,38 +34,16 @@ namespace ToroChallenge.Application.FilterAttributes
 
         private ObjectResult StatusCode(int status, object response = null)
         {
-            return new ObjectResult(response)
-            {
-                StatusCode = status
-            };
+            return new ObjectResult();
+            //return new ObjectResult(response)
+            //{
+            //    StatusCode = status
+            //};
         }
 
         private void SetResponse(ActionExecutingContext context, ObjectResult result)
         {
-            context.Result = result;
-        }
-    }
-
-    public interface IValidable
-    {
-        bool HasError(out IDictionary<string, string[]> errors);
-    }
-
-    public class Error
-    {
-        public string Code { get; set; }
-        public string Title { get; set; }
-        public string Detail { get; set; }
-        public Error()
-        {
-
-        }
-
-        public Error(string code, string title, string detail)
-        {
-            Code = code;
-            Title = title;
-            Detail = detail;
+            //context.Result = result;
         }
     }
 }

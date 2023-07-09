@@ -1,7 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using ToroChallenge.Application.ApplicationResults;
-using ToroChallenge.Application.FilterAttributes;
-using ToroChallenge.Application.Resources;
 using ToroChallenge.Application.Utils;
 using ToroChallenge.Domain.Entities;
 using ToroChallenge.Domain.Services;

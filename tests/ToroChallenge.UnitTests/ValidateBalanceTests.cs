@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-
-namespace ToroChallenge.UnitTests
+﻿namespace ToroChallenge.UnitTests
 {
     //Validar Saldo
     internal class ValidateBalanceTests

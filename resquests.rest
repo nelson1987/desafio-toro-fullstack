@@ -1,0 +1,9 @@
+###
+curl -X 'POST' \
+  'http://localhost:8000/Balance' \
+  -H 'accept: */*' \
+  -H 'Content-Type: application/json' \
+  -d '{
+  "loginUsuario": "string"
+}'
+###

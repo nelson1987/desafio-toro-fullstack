@@ -1,9 +1,16 @@
 #See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
+# FROM centos:7 AS base
+
+# # Add Microsoft package repository and install ASP.NET Core
+# RUN rpm -Uvh https://packages.microsoft.com/config/centos/7/packages-microsoft-prod.rpm \
+    # && yum install -y aspnetcore-runtime-6.0
+
+# # Ensure we listen on any IP Address 
+# ENV DOTNET_URLS=http://+:80
 
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
-EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src

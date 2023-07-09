@@ -1,8 +1,10 @@
 using FluentValidation;
+using MassTransit;
 using Microsoft.AspNetCore.ResponseCompression;
 using Serilog;
 using System.IO.Compression;
 using ToroChallenge.Api.ServiceCollections;
+using ToroChallenge.Application.UseCases.ContaAberta;
 using ToroChallenge.Application.UseCases.Patrimonios;
 try
 {
@@ -10,7 +12,7 @@ try
 
     builder.AddSerilog(builder.Configuration, "API Observability");
 
-    Log.Information("Starting API");
+    Serilog.Log.Information("Starting API");
 
 
     // Add services to the container.
@@ -20,7 +22,7 @@ try
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddSwaggerGen();
 
-    builder.Services.AddConfigureServices();
+    builder.Services.AddConfigureServices(builder.Configuration);
 
     // Configura o modo de compressão
     builder.Services.Configure<GzipCompressionProviderOptions>(
@@ -32,6 +34,19 @@ try
     });
 
     builder.Services.AddValidatorsFromAssemblyContaining<PatrimonioValidator>();
+
+
+    builder.Services.AddMassTransit(x =>
+    {
+        x.SetKebabCaseEndpointNameFormatter();
+        x.AddConsumer<ContaAbertaConsumer>(typeof(ContaAbertaConsumerDefinition));
+
+        x.UsingRabbitMq((context, cfg) =>
+        {
+            cfg.ConfigureEndpoints(context);
+        });
+    });
+    builder.Services.AddTransient<IBusMessage, ProcudeMessage>();
 
     var app = builder.Build();
 
@@ -73,10 +88,10 @@ try
 }
 catch (Exception ex)
 {
-    Log.Fatal(ex, "Host terminated unexpectedly");
+    Serilog.Log.Fatal(ex, "Host terminated unexpectedly");
 }
 finally
 {
-    Log.Information("Server Shutting down...");
-    Log.CloseAndFlush();
+    Serilog.Log.Information("Server Shutting down...");
+    Serilog.Log.CloseAndFlush();
 }

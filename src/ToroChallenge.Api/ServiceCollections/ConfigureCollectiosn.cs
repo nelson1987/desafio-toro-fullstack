@@ -14,7 +14,7 @@ namespace ToroChallenge.Api.ServiceCollections
 {
     public static class ConfigureCollections
     {
-        public static IServiceCollection AddConfigureServices(this IServiceCollection services)
+        public static IServiceCollection AddConfigureServices(this IServiceCollection services, IConfiguration configuration)
         {
             Assembly assembly = typeof(InvestimentoHandler).GetTypeInfo().Assembly;
             services.AddMediatR(x =>
@@ -37,6 +37,10 @@ namespace ToroChallenge.Api.ServiceCollections
             services.AddTransient<IBalanceQueryRepository, SaldoQueryRepository>();
             services.AddTransient<IBalanceCommandRepository, SaldoCommandRepository>();
             services.AddTransient<IApplicationResult, ApplicationResult>();
+
+
+            services.AddScoped<MongoDbSession>();
+            //services.Configure<BookStoreDatabaseSettings>(configuration.GetSection("BookStoreDatabase"));
             return services;
 
         }

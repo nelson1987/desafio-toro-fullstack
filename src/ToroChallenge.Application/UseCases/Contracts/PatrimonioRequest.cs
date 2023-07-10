@@ -1,6 +1,6 @@
 ﻿using ToroChallenge.Application.UseCases.Patrimonios;
 
-namespace ToroChallenge.Application.Contracts
+namespace ToroChallenge.Application.UseCases.Contracts
 {
     public class PatrimonioRequest
     {

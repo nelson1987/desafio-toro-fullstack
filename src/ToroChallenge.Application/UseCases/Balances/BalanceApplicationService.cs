@@ -2,15 +2,15 @@
 using ToroChallenge.Domain.Entities;
 using ToroChallenge.Domain.Repositories;
 
-namespace ToroChallenge.Application.ApplicationServices
+namespace ToroChallenge.Application.UseCases.Balances
 {
-    public class BalanceService : IBalanceService
+    public class BalanceApplicationService : IBalanceapplicationService
     {
         private readonly IBalanceQueryRepository _queryRepository;
         private readonly IBalanceCommandRepository _commandRepository;
-        private readonly ILogger<BalanceService> _logger;
+        private readonly ILogger<BalanceApplicationService> _logger;
 
-        public BalanceService(IBalanceQueryRepository queryRepository, IBalanceCommandRepository commandRepository)
+        public BalanceApplicationService(IBalanceQueryRepository queryRepository, IBalanceCommandRepository commandRepository)
         {
             _queryRepository = queryRepository;
             _commandRepository = commandRepository;

@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using ToroChallenge.Application.ApplicationServices;
+using ToroChallenge.Application.UseCases.Balances;
 using ToroChallenge.Application.Utils;
 using ToroChallenge.Domain.Entities;
 
@@ -32,7 +32,7 @@ namespace ToroChallenge.Application.UseCases.Investimentos
                 _applicationResult.NotFound(DicionarioMessages.NenhumInvestimentoFoiEncontrado);
             }
 
-            return investimentos.Select(x => InvestimentoResponse.FromModel(x)).ToArray();
+            return investimentos.Select(x => (InvestimentoResponse)x).ToArray();
         }
         public async Task GetValidation(InvestimentoCommand request, CancellationToken cancellationToken)
         {

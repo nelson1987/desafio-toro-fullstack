@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
-using ToroChallenge.Application.ApplicationServices;
+using ToroChallenge.Application.UseCases.Balances;
 using ToroChallenge.Application.Utils;
 using ToroChallenge.Domain.Entities;
 
@@ -7,11 +7,11 @@ namespace ToroChallenge.Application.UseCases.Saldos
 {
     public class SaldoCommandHandler : ISaldoCommandHandler
     {
-        private readonly IBalanceService _investimentoService;
+        private readonly IBalanceapplicationService _investimentoService;
         private readonly IApplicationResult _applicationResult;
         private readonly ILogger<SaldoCommandHandler> _logger;
 
-        public SaldoCommandHandler(IBalanceService investimentoService, IApplicationResult applicationResult, ILogger<SaldoCommandHandler> logger)
+        public SaldoCommandHandler(IBalanceapplicationService investimentoService, IApplicationResult applicationResult, ILogger<SaldoCommandHandler> logger)
         {
             _investimentoService = investimentoService;
             _applicationResult = applicationResult;
@@ -32,8 +32,8 @@ namespace ToroChallenge.Application.UseCases.Saldos
             {
                 _applicationResult.NotFound(DicionarioMessages.SaldoNaoEncontrado);
             }
-
-            return SaldoResponse.FromModel(saldo);
+            
+            return (SaldoResponse)saldo;
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using FluentValidation.AspNetCore;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
-using ToroChallenge.Application.ApplicationServices;
+using ToroChallenge.Application.UseCases.Balances;
 using ToroChallenge.Application.UseCases.Investimentos;
 using ToroChallenge.Application.UseCases.Saldos;
 using ToroChallenge.Application.Utils;
@@ -29,7 +29,7 @@ namespace ToroChallenge.Api.ServiceCollections
             services.AddTransient<ISaldoCommandHandler, SaldoCommandHandler>();
             //Servicos
             services.AddTransient<IInvestimentoService, InvestimentService>();
-            services.AddTransient<IBalanceService, BalanceService>();
+            services.AddTransient<IBalanceapplicationService, BalanceApplicationService>();
             //Servicos
             services.AddTransient<IInvestimentoQueryRepository, InvestimentoQueryRepository>();
             services.AddTransient<IInvestimentoCommandRepository, InvestimentoCommandRepository>();

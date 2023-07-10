@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using ToroChallenge.Application.ApplicationServices;
-using ToroChallenge.Application.Contracts;
+using ToroChallenge.Application.UseCases.Contracts;
 using ToroChallenge.Application.Utils;
 
 namespace ToroChallenge.Api.Controllers

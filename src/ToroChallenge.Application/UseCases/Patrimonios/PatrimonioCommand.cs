@@ -16,7 +16,7 @@ namespace ToroChallenge.Application.UseCases.Patrimonios
             return !GetValidation().IsValid;
         }
 
-        public explicit operator PatrimonioResponse ToResponse()
+        public static explicit operator PatrimonioResponse(PatrimonioCommand command)
         {
             throw new NotImplementedException();
         }

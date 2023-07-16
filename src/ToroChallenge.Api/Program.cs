@@ -1,17 +1,12 @@
 using FluentValidation;
 using MassTransit;
-using MassTransit.Testing;
-using MassTransit.Transports.Fabric;
 using Microsoft.AspNetCore.ResponseCompression;
 using Serilog;
-using Swashbuckle.AspNetCore.SwaggerGen;
 using System.IO.Compression;
 using System.Reflection;
 using ToroChallenge.Api.ServiceCollections;
 using ToroChallenge.Application.UseCases.ContaAberta;
-using ToroChallenge.Application.UseCases.Formatter;
 using ToroChallenge.Application.UseCases.Patrimonios;
-using static MassTransit.Logging.DiagnosticHeaders.Messaging;
 
 try
 {

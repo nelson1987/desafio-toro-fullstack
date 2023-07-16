@@ -5,18 +5,30 @@ using ToroChallenge.Application.Utils;
 
 namespace ToroChallenge.Application.UseCases.ContaAberta
 {
+    [ExcludeFromTopology]
+    public class MessageEvent
+    {
+    }
+    public class MessageConsumer :
+    IConsumer<MessageEvent>
+    {
+        public Task Consume(ConsumeContext<MessageEvent> context)
+        {
+            throw new NotImplementedException();
+        }
+    }
     public class ContaAbertaEventConsumer :
-        IConsumer<ContaAbertaEvent>
+    IConsumer<ClienteAlteradoEvent>
     {
         readonly ILogger<ContaAbertaEventConsumer> _logger;
         readonly IMediator _mediator;
-
-        public ContaAbertaEventConsumer(ILogger<ContaAbertaEventConsumer> logger, IMediator mediator)
+        public ContaAbertaEventConsumer() { }
+        public ContaAbertaEventConsumer(ILogger<ContaAbertaEventConsumer> logger, IMediator mediator) : this()
         {
             _logger = logger;
             _mediator = mediator;
         }
-        public async Task Consume(ConsumeContext<ContaAbertaEvent> context)
+        public async Task Consume(ConsumeContext<ClienteAlteradoEvent> context)
         {
             try
             {

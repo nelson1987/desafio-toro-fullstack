@@ -32,8 +32,8 @@ namespace ToroChallenge.Application.UseCases.Saldos
             {
                 _applicationResult.NotFound(DicionarioMessages.SaldoNaoEncontrado);
             }
-            
-            return (SaldoResponse)saldo;
+            SaldoResponse response = saldo;
+            return response;
         }
     }
 }

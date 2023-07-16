@@ -1,23 +1,23 @@
 using FluentAssertions;
-using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Moq;
 using System.Net;
 using ToroChallenge.Api.Controllers;
-using ToroChallenge.Application.UseCases.Patrimonios;
+using ToroChallenge.Application.ApplicationServices;
+using ToroChallenge.Application.UseCases.Contracts;
 
 namespace ToroChallenge.UnitTests
 {
     public class BalanceControllerTests
     {
         private readonly Mock<ILogger<BalanceController>> _logger;
-        private readonly Mock<IMediator> _mediator;
+        private readonly Mock<IInvestimentoApplicationService> _mediator;
         private readonly BalanceController _controller;
         public BalanceControllerTests()
         {
             _logger = new Mock<ILogger<BalanceController>>();
-            _mediator = new Mock<IMediator>();
+            _mediator = new Mock<IInvestimentoApplicationService>();
             _controller = new BalanceController(_logger.Object, _mediator.Object);
         }
 
@@ -29,7 +29,7 @@ namespace ToroChallenge.UnitTests
         [Test]
         public async Task ReturnOk()
         {
-            PatrimonioCommand commando = new PatrimonioCommand();
+            PatrimonioRequest commando = new PatrimonioRequest();
             var retorno = (StatusCodeResult)await _controller.PostSaldoAsync(commando, It.IsAny<CancellationToken>()).ConfigureAwait(true);
             //retorno.Should().Be(HttpStatusCode.OK);
             //Assert.IsType<BadRequestObjectResult>(result);

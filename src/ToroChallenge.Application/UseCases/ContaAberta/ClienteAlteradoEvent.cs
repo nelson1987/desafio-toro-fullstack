@@ -2,13 +2,13 @@
 
 namespace ToroChallenge.Application.UseCases.ContaAberta
 {
-    public class ContaAbertaEvent : IEvent
+    public class ClienteAlteradoEvent : IEvent
     {
         public Guid CorrelationId { get { return Guid.NewGuid(); } }
         //
         public string QueueName { get { return "Conta-Aberta-Event"; } }
 
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string Numero { get; set; }
         public string Tipo { get; set; }
         public int IdCliente { get; set; }

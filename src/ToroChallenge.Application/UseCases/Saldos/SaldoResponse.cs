@@ -7,7 +7,7 @@ namespace ToroChallenge.Application.UseCases.Saldos
         public decimal Valor { get; set; }
         public DateTime DataAtualizacao { get; set; }
 
-        public static explicit operator SaldoResponse(Balance saldo)
+        public static implicit operator SaldoResponse(Balance saldo)
         {
             return new SaldoResponse() { Valor = saldo.Valor, DataAtualizacao = saldo.DataAtualizacao };
         }

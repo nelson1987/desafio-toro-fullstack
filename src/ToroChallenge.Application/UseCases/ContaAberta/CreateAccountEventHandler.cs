@@ -2,7 +2,7 @@
 
 namespace ToroChallenge.Application.UseCases.ContaAberta
 {
-    public class CreateAccountEventHandler : INotificationHandler<ContaAbertaEvent>
+    public class CreateAccountEventHandler : INotificationHandler<ClienteAlteradoEvent>
     {
         //private readonly ICreatedAccountEventRepository _repository;
         //
@@ -17,7 +17,7 @@ namespace ToroChallenge.Application.UseCases.ContaAberta
         //    return Task.CompletedTask;
         //}
 
-        public async Task Handle(ContaAbertaEvent notification, CancellationToken cancellationToken)
+        public async Task Handle(ClienteAlteradoEvent notification, CancellationToken cancellationToken)
         {
             //var factory = new ConnectionFactory() { HostName = "localhost" };
             //using (var connection = factory.CreateConnection())

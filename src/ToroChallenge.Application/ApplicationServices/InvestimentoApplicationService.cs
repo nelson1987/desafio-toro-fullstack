@@ -12,10 +12,10 @@ namespace ToroChallenge.Application.ApplicationServices
     public class InvestimentoApplicationService : IInvestimentoApplicationService
     {
         private readonly IMediator _mediator;
-        private readonly IPublishEndpoint _publisher;
+        private readonly IBus _publisher;
         private readonly ILogger<InvestimentoApplicationService> _logger;
 
-        public InvestimentoApplicationService(IMediator mediator, IPublishEndpoint publisher, ILogger<InvestimentoApplicationService> logger)
+        public InvestimentoApplicationService(IMediator mediator, IBus publisher, ILogger<InvestimentoApplicationService> logger)
         {
             _mediator = mediator;
             _publisher = publisher;
@@ -26,7 +26,7 @@ namespace ToroChallenge.Application.ApplicationServices
         {
             _logger.LogInformation("Teste: {command}", request.ToJson());
             var invest = _mediator.Send(new InvestimentoCommand(), cancellationToken);
-            await _publisher.Publish(new ContaAbertaEvent() { Numero = "11122233351" }, cancellationToken);
+            await _publisher.Publish(new ClienteAlteradoEvent() { Numero = "11122233351" }, cancellationToken);
             var alteracao = await _mediator.Send(request, cancellationToken);
             _logger.LogInformation("Teste: {command}", request.ToJson());
             return (PatrimonioResponse)request;
@@ -35,7 +35,8 @@ namespace ToroChallenge.Application.ApplicationServices
         public async Task<PatrimonioResponse> PostFilaAsync([FromBody] PatrimonioCommand request, CancellationToken cancellationToken)
         {
             _logger.LogInformation("Teste: {command}", request.ToJson());
-            await _publisher.Publish(new ContaAbertaEvent() { Numero = "11122233351" }, cancellationToken);
+            //await _publisher.Publish<ContaAbertaEvent>(new { NodeId = _nodeId }, stoppingToken);
+            await _publisher.Publish(new ClienteAlteradoEvent() { Numero = "11122233351" }, cancellationToken);
             _logger.LogInformation("Teste: {command}", request.ToJson());
             return (PatrimonioResponse)request;
         }

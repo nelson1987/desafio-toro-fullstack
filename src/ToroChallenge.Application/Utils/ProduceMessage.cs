@@ -3,11 +3,14 @@ using System.Text;
 
 namespace ToroChallenge.Application.Utils
 {
-    public class ProcudeMessage : IBusMessage
+    public class ProduceMessage : IBusMessage
     {
         public void Init(IEvent message)
         {
-            var factory = new ConnectionFactory { HostName = "localhost", UserName = "guest", Password = "guest" };
+            var factory = new ConnectionFactory { 
+                HostName = "localhost", 
+                UserName = "guest", 
+                Password = "guest" };
             using var connection = factory.CreateConnection();
             using var channel = connection.CreateModel();
 
